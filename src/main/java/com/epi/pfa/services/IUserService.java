@@ -10,5 +10,6 @@ import java.util.Optional;
 public interface IUserService {
     User saveUser(User user);
     User getUserById(Long id);
+    User getUserByUsername(String username);
     Optional<User> findById(long id);
 }

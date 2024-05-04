@@ -28,6 +28,11 @@ public class UserService implements IUserService{
     }
 
     @Override
+    public User getUserByUsername(String username) {
+        return userRepository.findByUsername(username);
+    }
+
+    @Override
     public Optional<User> findById(long id) {
         return Optional.ofNullable(userRepository.findById(id).orElse(null));
     }
