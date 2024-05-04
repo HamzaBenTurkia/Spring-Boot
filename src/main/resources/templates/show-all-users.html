@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Show All Users</title>
+    <style>
+        /* Add your CSS styles here */
+        .container {
+            margin: 20px auto;
+            max-width: 800px;
+        }
+        .user-card {
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            padding: 10px;
+            background-color: #f9f9f9;
+        }
+        .pagination {
+            margin-top: 20px;
+        }
+        .pagination ul {
+            list-style-type: none;
+            padding: 0;
+            text-align: center;
+        }
+        .pagination li {
+            display: inline-block;
+            margin-right: 5px;
+        }
+        .pagination li a {
+            display: block;
+            padding: 5px 10px;
+            background-color: #f0f0f0;
+            text-decoration: none;
+            color: #333;
+        }
+        .pagination li.active a {
+            background-color: #337ab7;
+            color: #fff;
+        }
+        .ul {
+            top: 0;
+            right: 0;
+            padding: 10px;
+            background-color: rgba(255, 255, 255, 0.8); /* Adjust the background color and opacity as needed */
+            z-index: 1;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+
+    </style>
+</head>
+<a href="/home">&larr; Go back</a>
+<body>
+<div class="container">
+    <p>Click <a th:href="@{/users/addUser}">here</a> to add user.</p>
+    <h2>All Users</h2>
+    <div th:if="${users.empty}" class="text-center">No users found.</div>
+    <div th:if="${not users.empty}" class="row">
+        <div th:each="user : ${users.content}" class="col-md-4">
+            <div class="card user-card">
+                <div class="card-body">
+                    <div>
+                        <h5 class="card-title" th:text="${user.username}"></h5>
+                        <img th:src="@{'/users/profileImage/' + ${user.id}}" class="card-img-top user-image" alt="Profile Image">
+                        <ul>
+                            <li th:each="post : ${user.posts}" th:text="${post.content}"></li>
+                        </ul>
+                    </div>
+                    <form th:action="@{/users/deleteUser}" method="post" onsubmit="return confirm('Are you sure you want to delete this user?');">
+                        <input type="hidden" name="id" th:value="${user.id}" />
+                        <button type="submit" class="btn btn-danger">Delete</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="pagination">
+        <ul>
+            <li th:class="${users.first} ? 'disabled' : ''">
+                <a th:if="${not users.first}" th:href="@{/users/showAllUsers(page=${users.number - 1}, size=${size})}" aria-label="Previous">
+                    <span aria-hidden="true">&laquo;</span>
+                </a>
+            </li>
+            <li th:each="pageNumber : ${#numbers.sequence(0, users.totalPages-1)}" th:class="${pageNumber == users.number} ? 'active' : ''">
+                <a th:href="@{/users/showAllUsers(page=${pageNumber}, size=${size})}" th:text="${pageNumber + 1}"></a>
+            </li>
+            <li th:class="${users.last} ? 'disabled' : ''">
+                <a th:if="${not users.last}" th:href="@{/users/showAllUsers(page=${users.number + 1}, size=${size})}" aria-label="Next">
+                    <span aria-hidden="true">&raquo;</span>
+                </a>
+            </li>
+        </ul>
+    </div>
+</div>
+</body>
+</html>

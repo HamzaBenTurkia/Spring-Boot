@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>All Tags</title>
+    <style>
+        /* Example CSS for tag list */
+        .container {
+            margin: 20px auto;
+            max-width: 600px;
+            padding: 0 20px;
+        }
+
+        .tag-list ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .tag-list .tag-item {
+            display: inline-block;
+            margin-right: 10px;
+            margin-bottom: 10px;
+            padding: 5px 10px;
+            background-color: #f0f0f0;
+            border-radius: 5px;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<a href="/home">&larr; Go back</a>
+<body>
+<div class="container">
+    <p>Click <a th:href="@{/tags/addTag}">here</a> to add tag.</p>
+    <h2>All Tags</h2>
+    <div class="tag-list">
+        <ul>
+            <li th:each="tag : ${tags}" class="tag-item">
+                <span th:text="${tag.name}"></span>
+            </li>
+        </ul>
+    </div>
+</div>
+</body>
+</html>

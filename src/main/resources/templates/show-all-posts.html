@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>All Posts</title>
+    <style>
+        /* Example CSS for post list */
+        .container {
+            margin: 20px auto;
+            max-width: 600px;
+            padding: 0 20px;
+        }
+
+        .post-list ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .post-list .post-item {
+            display: inline-block;
+            margin-right: 10px;
+            margin-bottom: 10px;
+            padding: 5px 10px;
+            background-color: #f0f0f0;
+            border-radius: 5px;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<a href="/home">&larr; Go back</a>
+<body>
+<div class="container">
+    <p>Click <a th:href="@{/posts/addPost}">here</a> to add post.</p>
+    <h2>All Posts</h2>
+    <div class="post-list">
+        <ul>
+            <li th:each="post : ${posts}" class="post-item">
+                <span th:text="${post.content}"></span>
+            </li>
+        </ul>
+    </div>
+</div>
+</body>
+</html>

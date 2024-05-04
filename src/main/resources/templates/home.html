@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <title>Spring Boot Pfa</title>
+</head>
+<style>
+    .navigation-menu {
+        display: flex;
+        justify-content: center; /* Center items horizontally */
+        list-style-type: none;
+        padding: 0;
+    }
+
+    .navigation-menu li {
+        margin: 0 20px; /* Adjust spacing between items */
+    }
+
+    .navigation-menu li a {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-decoration: none;
+        color: #333;
+    }
+
+    .navigation-menu li a img {
+        width: 500px;
+        height: auto;
+        margin-bottom: 5px;
+    }
+</style>
+<body>
+<h1>Welcome</h1>
+<form th:action="@{/logout}" method="post">
+    <input type="submit" value="Sign Out"/>
+</form>
+<nav>
+    <ul class="navigation-menu">
+        <li><a th:href="@{/users/showAllUsers}"><img src="https://static.prod01.ue1.p.pcomm.net/blackbaud/user_content/photos/000/006/6783/a6132a5cd55abcae190bc82567ca8a47-original-users.png" alt="Users"> Users</a></li>
+        <li><a th:href="@{/posts/showAllPosts}"><img src="https://smashballoon.com/wp-content/uploads/2020/04/types-of-instagram-posts-624x297.jpg" alt="Posts"> Posts</a></li>
+        <li><a th:href="@{/tags/showAllTags}"><img src="https://m.media-amazon.com/images/I/61qJCe4t-oL._AC_SL1500_.jpg" alt="Tags"> Tags</a></li>
+    </ul>
+</nav>
+</body>
+</html>

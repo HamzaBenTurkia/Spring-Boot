@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Add Post</title>
+</head>
+<body>
+<h2>Add Post</h2>
+<form action="/posts/save" method="post">
+    <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+    <label for="content">content:</label>
+    <input type="text" id="content" name="content" required><br>
+    <button type="submit">Submit</button>
+</form>
+</body>
+</html>
